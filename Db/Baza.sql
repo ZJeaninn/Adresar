@@ -1,29 +1,29 @@
-
+drop table "Oseba";
 drop table POSTA;
+
+
+CREATE TABLE OSEBA
+
+(    
+   IDOSEBA INT not null primary key
+        GENERATED ALWAYS AS IDENTITY
+        (START WITH 1, INCREMENT BY 1),   
+   PRIIMEK VARCHAR(50),     
+   STEVILKA VARCHAR(50),
+ 
+   POSTA INTEGER
+
+);
 
 CREATE TABLE POSTA
 
 (    
-   IDPOSTA INT not null primary key,  
+  IDPOSTA INT not null primary key
+        GENERATED ALWAYS AS IDENTITY
+        (START WITH 1, INCREMENT BY 1),  
    KRAJ VARCHAR(50)
 
 );
 
-drop table "Oseba" ;
-
-CREATE TABLE "Oseba"
-
-(    
-   "IdOSeba" INT not null primary key
-        GENERATED ALWAYS AS IDENTITY
-        (START WITH 1, INCREMENT BY 1),   
-   "Priimek" VARCHAR(50),     
-   "Stevilka" VARCHAR(50),
- 
-   "Posta" INTEGER
-
-);
-
-alter table "Oseba"
-add foreign key ("Posta") references POSTA(IdPosta);
-
+alter table OSEBA
+add foreign key (POSTA) references POSTA(IDPOSTA);
