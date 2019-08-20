@@ -21,8 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Adresar extends javax.swing.JFrame {
 
-    private Object priimekField;
-    private Object stevilkaField;
+    
 
     /**
      * Creates new form Adresar
@@ -46,9 +45,9 @@ public class Adresar extends javax.swing.JFrame {
         TabelaOseb = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        Dodaj = new javax.swing.JButton();
         priimekField = new javax.swing.JTextField();
         stevilkaField = new javax.swing.JTextField();
-        Dodaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +72,12 @@ public class Adresar extends javax.swing.JFrame {
             }
         });
 
+        stevilkaField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stevilkaFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,11 +89,11 @@ public class Adresar extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(priimekField, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                    .addComponent(stevilkaField))
-                .addGap(53, 53, 53)
+                    .addComponent(stevilkaField, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(priimekField))
+                .addGap(19, 19, 19)
                 .addComponent(Dodaj)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -103,8 +108,8 @@ public class Adresar extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(priimekField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Dodaj))
+                            .addComponent(Dodaj)
+                            .addComponent(priimekField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -146,6 +151,10 @@ public class Adresar extends javax.swing.JFrame {
 //    }
 //
     }//GEN-LAST:event_DodajActionPerformed
+
+    private void stevilkaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stevilkaFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stevilkaFieldActionPerformed
     public void Dodaj() {
         String data = "jdbc:derby://localhost:1527/Oseba";
         try (
