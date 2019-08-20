@@ -5,6 +5,7 @@
  */
 package adresar;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -19,6 +20,7 @@ public class Adresar {
 // max +1
     // triger after insert
     // 
+
     /**
      * @param args the command line arguments
      */
@@ -31,16 +33,15 @@ public class Adresar {
 
                     Class.forName("org.apache.derby.jdbc.ClientDriver");
 
-                    ResultSet rec = st.executeQuery(
-                            "select IdOseba, Priimek, Kraj, Stevilka "
-                            + "from APP.oseba "
-                            + "order by IdOseba");
-                    while (rec.next()) {
+                    String query1 = "Select * FROM Oseba";
+                    ResultSet rs = st.executeQuery(query1);
+
+                    while (rs.next()) {
                         System.out.println("IdOseba:\t"
-                                + rec.getString(1));
-                        System.out.println("Priimek:\t" + rec.getString(2));
-                        System.out.println("Kraj:\t" + rec.getString(3));
-                        System.out.println("Stevilka:\t" + rec.getInt(4));
+                                + rs.getInt("idoseba"));
+                        System.out.println("Priimek:\t" + rs.getString("priimek"));
+                        System.out.println("stevilka:\t" + rs.getString("stevilka"));
+                        System.out.println("posta:\t" + rs.getInt("posta"));
                         System.out.println();
                     }
                     st.close();
