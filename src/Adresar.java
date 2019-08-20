@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -19,13 +21,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Adresar extends javax.swing.JFrame {
 
+    private Object priimekField;
+    private Object stevilkaField;
+
     /**
      * Creates new form Adresar
      */
     public Adresar() {
         initComponents();
         Prikazi();
-        DodajActionPerformed(null);
+
     }
 
     /**
@@ -42,7 +47,7 @@ public class Adresar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         priimekField = new javax.swing.JTextField();
-        stevilka = new javax.swing.JTextField();
+        stevilkaField = new javax.swing.JTextField();
         Dodaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,7 +85,7 @@ public class Adresar extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(priimekField, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                    .addComponent(stevilka))
+                    .addComponent(stevilkaField))
                 .addGap(53, 53, 53)
                 .addComponent(Dodaj)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
@@ -103,7 +108,7 @@ public class Adresar extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(stevilka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(stevilkaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -112,21 +117,56 @@ public class Adresar extends javax.swing.JFrame {
 
     private void DodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DodajActionPerformed
         // TODO add your handling code here:
+
+        Dodaj();
+
+//    String data = "jdbc:derby://localhost:1527/Oseba";
+//
+//        try {
+//            Connection conn = DriverManager.getConnection(
+//                data);
+//        Class.forName("org.apache.derby.jdbc.ClientDriver");
+//        PreparedStatement st = conn.prepareStatement("Insert into APP.Oseba (PRIIMEK, STEVILKA) values (?,?)");
+//
+//        st.setString(1, priimekField.getText());
+//        st.setString(2, stevilka.getText());
+//
+//    }
+//    catch (SQLException e
+//
+//    
+//        ) {
+//            e.printStackTrace();
+//    }
+//    catch (ClassNotFoundException ex
+//
+//    
+//        ) {
+//            Logger.getLogger(Adresar.class.getName()).log(Level.SEVERE, null, ex);
+//    }
+//
+    }//GEN-LAST:event_DodajActionPerformed
+    public void Dodaj() {
         String data = "jdbc:derby://localhost:1527/Oseba";
         try (
                 Connection conn = DriverManager.getConnection(
-                        data);) {
+                        data)) {
+                    Class.forName("org.apache.derby.jdbc.ClientDriver");
+                    PreparedStatement prep2 = conn.prepareStatement("insert into " + "APP.Oseba(PRIIMEK, STEVILKA)" + "values (?,?)");
+                    prep2.setString(1, priimekField.getText());
+                    prep2.setString(2, stevilkaField.getText());
 
-                    PreparedStatement st = conn.prepareStatement("Insert into Oseba (PRIIMEK, STEVILKA) values (?,?)");
-
-                    st.setString(1, priimekField.getText());
-                    st.setString(2, stevilka.getText());
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                    prep2.executeUpdate();
+                    prep2.close();
+                    conn.close();
+                } catch (SQLException sqe) {
+                    System.out.println(
+                            "SQL Error         : " + sqe.getMessage()
+                    );
+                } catch (ClassNotFoundException cnfe) {
+                    System.out.println(cnfe.getMessage());
                 }
-
-    }//GEN-LAST:event_DodajActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -217,6 +257,7 @@ public class Adresar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField priimekField;
-    private javax.swing.JTextField stevilka;
+    private javax.swing.JTextField stevilkaField;
     // End of variables declaration//GEN-END:variables
+
 }

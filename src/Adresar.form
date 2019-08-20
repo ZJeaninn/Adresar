@@ -32,7 +32,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="priimekField" pref="60" max="32767" attributes="0"/>
-                  <Component id="stevilka" max="32767" attributes="0"/>
+                  <Component id="stevilkaField" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
               <Component id="Dodaj" min="-2" max="-2" attributes="0"/>
@@ -60,7 +60,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="stevilka" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="stevilkaField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -130,7 +130,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="priimekField">
     </Component>
-    <Component class="javax.swing.JTextField" name="stevilka">
+    <Component class="javax.swing.JTextField" name="stevilkaField">
     </Component>
     <Component class="javax.swing.JButton" name="Dodaj">
       <Properties>

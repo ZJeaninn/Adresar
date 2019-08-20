@@ -37,5 +37,16 @@ class Oseba {
     public int getPosta() {
         return posta;
     }
+ public void setPriimek(String priimek)
+    {
+        //setting the userID variable value
+        this.priimek = priimek;
+    }
+  public void setStevilka(String stevilka)
+    {
+        //setting the userID variable value
+        this.stevilka = stevilka;
+    }
+
 
 }

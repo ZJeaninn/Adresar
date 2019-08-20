@@ -25,7 +25,9 @@ public class Adresar {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         String data = "jdbc:derby://localhost:1527/Oseba";
+        
         try (
                 Connection conn = DriverManager.getConnection(
                         data);
