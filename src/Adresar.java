@@ -6,9 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,8 +19,6 @@ import javax.swing.table.DefaultTableModel;
  * @author zanina
  */
 public class Adresar extends javax.swing.JFrame {
-
-    
 
     /**
      * Creates new form Adresar
@@ -49,6 +46,8 @@ public class Adresar extends javax.swing.JFrame {
         priimekField = new javax.swing.JTextField();
         stevilkaField = new javax.swing.JTextField();
         osvezi = new javax.swing.JButton();
+        posta = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,11 +59,16 @@ public class Adresar extends javax.swing.JFrame {
                 "Id", "Priimek", "Stevilka", "Posta"
             }
         ));
+        TabelaOseb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelaOsebMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TabelaOseb);
 
         jLabel1.setText("Priimek");
 
-        jLabel2.setText("Stevilka");
+        jLabel2.setText("Telefonska stevilka");
 
         Dodaj.setText("Dodaj");
         Dodaj.addActionListener(new java.awt.event.ActionListener() {
@@ -86,28 +90,36 @@ public class Adresar extends javax.swing.JFrame {
             }
         });
 
+        posta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel3.setText("Posta");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(osvezi)
+                        .addGap(30, 30, 30))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(stevilkaField, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                            .addComponent(priimekField))
-                        .addGap(19, 19, 19)
-                        .addComponent(Dodaj)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(osvezi)
-                        .addGap(30, 30, 30)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(posta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(stevilkaField, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                                    .addComponent(priimekField))
+                                .addGap(19, 19, 19)
+                                .addComponent(Dodaj)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -127,6 +139,10 @@ public class Adresar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(stevilkaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(posta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(osvezi)
                 .addGap(22, 22, 22))
@@ -139,32 +155,6 @@ public class Adresar extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         Dodaj();
-
-//    String data = "jdbc:derby://localhost:1527/Oseba";
-//
-//        try {
-//            Connection conn = DriverManager.getConnection(
-//                data);
-//        Class.forName("org.apache.derby.jdbc.ClientDriver");
-//        PreparedStatement st = conn.prepareStatement("Insert into APP.Oseba (PRIIMEK, STEVILKA) values (?,?)");
-//
-//        st.setString(1, priimekField.getText());
-//        st.setString(2, stevilka.getText());
-//
-//    }
-//    catch (SQLException e
-//
-//    
-//        ) {
-//            e.printStackTrace();
-//    }
-//    catch (ClassNotFoundException ex
-//
-//    
-//        ) {
-//            Logger.getLogger(Adresar.class.getName()).log(Level.SEVERE, null, ex);
-//    }
-//
     }//GEN-LAST:event_DodajActionPerformed
 
     private void stevilkaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stevilkaFieldActionPerformed
@@ -173,22 +163,55 @@ public class Adresar extends javax.swing.JFrame {
 
     private void osveziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_osveziActionPerformed
         // TODO add your handling code here:
+
         Prikazi();
     }//GEN-LAST:event_osveziActionPerformed
+
+    private void TabelaOsebMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaOsebMouseClicked
+        // TODO add your handling code here:
+
+        String data = "jdbc:derby://localhost:1527/Oseba";
+        try (
+                Connection conn = DriverManager.getConnection(
+                        data)) {
+                    Class.forName("org.apache.derby.jdbc.ClientDriver");
+                    DefaultTableModel model = (DefaultTableModel) TabelaOseb.getModel();
+                    int index = TabelaOseb.getSelectedRow();
+                    String sql = "DELETE FROM APP.Oseba WHERE IDOSEBA=";
+                    sql = sql + TabelaOseb.getValueAt(index, 0).toString();
+
+                    PreparedStatement stavek = conn.prepareStatement(sql);
+                    stavek.executeUpdate();
+                    stavek.close();
+                    conn.close();
+
+                    model.removeRow(index);
+                    model.fireTableDataChanged();
+
+                } catch (SQLException sqe) {
+                    System.out.println(
+                            "SQL Error         : " + sqe.getMessage()
+                    );
+                } catch (ClassNotFoundException cnfe) {
+                    System.out.println(cnfe.getMessage());
+                }
+
+
+    }//GEN-LAST:event_TabelaOsebMouseClicked
     public void Dodaj() {
         String data = "jdbc:derby://localhost:1527/Oseba";
         try (
                 Connection conn = DriverManager.getConnection(
                         data)) {
                     Class.forName("org.apache.derby.jdbc.ClientDriver");
+
                     PreparedStatement prep2 = conn.prepareStatement("insert into " + "APP.Oseba(PRIIMEK, STEVILKA)" + "values (?,?)");
                     prep2.setString(1, priimekField.getText());
                     prep2.setString(2, stevilkaField.getText());
-
                     prep2.executeUpdate();
-                    
                     prep2.close();
                     conn.close();
+
                 } catch (SQLException sqe) {
                     System.out.println(
                             "SQL Error         : " + sqe.getMessage()
@@ -233,6 +256,7 @@ public class Adresar extends javax.swing.JFrame {
     private void Prikazi() {
         ArrayList<Oseba> list = Tabela();
         DefaultTableModel model = (DefaultTableModel) TabelaOseb.getModel();
+       // poišči za brisanje tabele
         Object[] row = new Object[4];
         for (int i = 0; i < list.size(); i++) {
             row[0] = list.get(i).getId();
@@ -240,7 +264,10 @@ public class Adresar extends javax.swing.JFrame {
             row[2] = list.get(i).getStevilka();
             row[3] = list.get(i).getPosta();
             model.addRow(row);
+
         }
+
+        model.fireTableDataChanged();
     }
 
     public static void main(String args[]) {
@@ -285,8 +312,10 @@ public class Adresar extends javax.swing.JFrame {
     private javax.swing.JTable TabelaOseb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton osvezi;
+    private javax.swing.JComboBox posta;
     private javax.swing.JTextField priimekField;
     private javax.swing.JTextField stevilkaField;
     // End of variables declaration//GEN-END:variables
